@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Web Atrio</title>
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <!-- Goggle Font -->
+      <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
+      <!-- Custom CSS -->
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <!-- Animation Css -->
+      <link rel="stylesheet" href="css/animate.css">
+   </head>
+   <body>
+      <div id="homeFullScreen">
+         <header>
+            <div class="header-text"> 
+               <h1>Ajouter un utilisateur</h1>
+            </div>
+         </header>
+         <section class="call-top-action">
+            <div class="text-center">
+               <form class="form-inline" th:action="@{/index}" th:object="${userForm}" method="POST">
+                  <div class="form-group">
+                     <label for="firstName" >Prenom:</label>
+                     <input type="text" th:field="*{firstName}" class="form-control" id="firstName"/>    
+                  </div>
+                  <div class="form-group">
+                     <label for="lastName">Nom:</label>
+                     <input type="text" th:field="*{lastName}" class="form-control" id="lastName"/>  
+                  </div>
+                  <div class="form-group">
+                     <label for="birthday">Date de naissance: </label> 
+                     <input type="date" th:field="*{birthdayStr}" class="form-control" id="birthday" /> 
+                  </div>
+                  <button type="submit" class="btn btn-default">Ajouter</button>
+                  
+                  <div th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
+                  <div th:if="${dateMessage}" th:utext="${dateMessage}" style="color:red;font-style:italic;">
+                  
+               </form>
+            </div>
+         
+         </section>
+         <div class="container">
+            <div class="header-text">
+               <h1>Liste d'utilisateur</h1>
+            </div>
+            <div class="vertical-line"></div>
+            <table class="table">
+               <thead>
+                  <tr>
+                     <th scope="col">Prénom</th>
+                     <th scope="col">Nom</th>
+                     <th scope="col">Age</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr th:each ="user : ${users}">
+                     <td th:utext="${user.firstName}"></td>
+                     <td th:utext="${user.lastName}"></td>
+                     <td th:utext="${user.age}"></td>
+                  </tr>
+               </tbody>
+            </table>
+            <a href="/users">REST API url</a>
+            <footer>
+               <ul>
+                  <li th:utext="${message}"></li>
+               </ul>
+            </footer>
+         </div>
+      </div>
+
+      <!-- Main JS -->
+      <script type="text/javascript" src="js/jquery-main.js"></script>
+      <!-- Bootstrap JS -->
+      <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      <!-- Animation JS -->
+      <script type="text/javascript" src="js/wow.min.js"></script>
+      <!-- Custom JS -->
+      <script type="text/javascript" src="js/custom.js"></script>
+   </body>
+</html>
