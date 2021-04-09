@@ -34,7 +34,7 @@ public class UserController {
         this.userServ.addUser(u);
     }
 
-    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/", "index" }, method = RequestMethod.GET)
     public String index(Model model) {
         if(model.getAttribute("userForm")==null) {
             User userForm = new User();
@@ -46,7 +46,7 @@ public class UserController {
         return "index";
     }
  
-    @RequestMapping(value = { "/index" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "index" }, method = RequestMethod.POST)
     public String saveUser(Model model, @ModelAttribute("userForm") User userForm) {
  
         String firstName = userForm.getFirstName();
@@ -61,7 +61,7 @@ public class UserController {
                 User newUser = new User(firstName,lastName,birthday);
                 this.addUser(newUser);
                 model.addAttribute("userForm", new User());
-                return "redirect:/index";
+                return "redirect:index";
             }
             catch (DateTimeException e)
             {
